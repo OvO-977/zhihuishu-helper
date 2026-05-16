@@ -224,7 +224,7 @@
     try {
       video.currentTime = 0;
     } catch (err) {
-      console.warn('[zhihuishu-helper] Current video ended before reaching 100%; failed to reset playback position.', err);
+      console.warn('[智慧树助手] 当前视频已播到末尾但进度未满，重置播放进度失败。', err);
     }
 
     setTimeout(() => {
@@ -258,7 +258,7 @@
 
       if (video && video.ended) {
         if (isCurrentVideoProgressIncomplete()) {
-          console.log('[zhihuishu-helper] Current video ended before reaching 100%; replaying from the beginning.');
+          console.log('[智慧树助手] 当前视频已播到末尾但进度未满，从头重新播放当前视频。');
           replayCurrentVideo(video);
           return;
         }
@@ -477,7 +477,7 @@
     const mainBtn = document.createElement('button');
     mainBtn.className = 'main-btn';
     mainBtn.title = '智慧树课堂播放助手';
-    mainBtn.textContent = '?';
+    mainBtn.textContent = '\u25B6';
 
     mainBtn.addEventListener('click', () => {
       box.classList.toggle('open');

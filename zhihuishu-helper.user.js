@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         ÖÇ»ÛÊ÷ÖúÊÖ
+// @name         æ™ºæ…§æ ‘åŠ©æ‰‹
 // @version      1.1
-// @description  ÖÇ»ÛÊ÷ÊÓÆµ±¶ËÙ¡¢ÔÝÍ£ºó¼ÌÐø²¥·Å¡¢²¥·Å½áÊøºó´ÓÍ·²¥·Å»ò²¥·ÅÏÂÒ»¸öÊÓÆµ¡£
+// @description  æ™ºæ…§æ ‘è§†é¢‘å€é€Ÿã€æš‚åœåŽç»§ç»­æ’­æ”¾ã€æ’­æ”¾ç»“æŸåŽä»Žå¤´æ’­æ”¾æˆ–æ’­æ”¾ä¸‹ä¸€ä¸ªè§†é¢‘ã€‚
 // @match        *://*.zhihuishu.com/*
 // @match        *://*.zhihuishu.com/*/*
 // @grant        none
@@ -44,7 +44,7 @@
     try {
       await video.play();
     } catch (err) {
-      console.warn('[ÖÇ»ÛÊ÷ÖúÊÖ] ×Ô¶¯²¥·ÅÊ§°Ü£¬¿ÉÄÜ±»ä¯ÀÀÆ÷»òÆ½Ì¨À¹½Ø¡£ÇëÊÖ¶¯µã»÷Ò»´ÎÒ³Ãæ»òÓÒÏÂ½ÇÍ¼±ê¡£', err);
+      console.warn('[æ™ºæ…§æ ‘åŠ©æ‰‹] è‡ªåŠ¨æ’­æ”¾å¤±è´¥ï¼Œå¯èƒ½è¢«æµè§ˆå™¨æˆ–å¹³å°æ‹¦æˆªã€‚è¯·æ‰‹åŠ¨ç‚¹å‡»ä¸€æ¬¡é¡µé¢æˆ–å³ä¸‹è§’å›¾æ ‡ã€‚', err);
     }
   }
 
@@ -141,7 +141,7 @@
       block: 'center'
     });
 
-    console.log('[ÖÇ»ÛÊ÷ÖúÊÖ] ×¼±¸ÇÐ»»µ½ÊÓÆµ£º', fileItem.innerText, fileItem);
+    console.log('[æ™ºæ…§æ ‘åŠ©æ‰‹] å‡†å¤‡åˆ‡æ¢åˆ°è§†é¢‘ï¼š', fileItem.innerText, fileItem);
 
     if (fileId && typeof window.changeFile === 'function') {
       window.changeFile(Number(fileId));
@@ -160,14 +160,14 @@
     const currentItem = findCurrentVideoItem();
 
     if (!currentItem) {
-      console.warn('[ÖÇ»ÛÊ÷ÖúÊÖ] Ã»ÕÒµ½µ±Ç°ÕýÔÚ²¥·ÅµÄÊÓÆµÄ¿Â¼Ïî£º.file-item.active');
+      console.warn('[æ™ºæ…§æ ‘åŠ©æ‰‹] æ²¡æ‰¾åˆ°å½“å‰æ­£åœ¨æ’­æ”¾çš„è§†é¢‘ç›®å½•é¡¹ï¼š.file-item.active');
       return;
     }
 
     const nextVideoItem = findNextVideoInCourseTree(currentItem);
 
     if (!nextVideoItem) {
-      console.warn('[ÖÇ»ÛÊ÷ÖúÊÖ] Ã»ÕÒµ½ºóÐøÊÓÆµ£¬¿ÉÄÜÒÑ¾­ÊÇ×îºóÒ»¸öÊÓÆµ¡£');
+      console.warn('[æ™ºæ…§æ ‘åŠ©æ‰‹] æ²¡æ‰¾åˆ°åŽç»­è§†é¢‘ï¼Œå¯èƒ½å·²ç»æ˜¯æœ€åŽä¸€ä¸ªè§†é¢‘ã€‚');
       return;
     }
 
@@ -198,7 +198,7 @@
     try {
       video.currentTime = 0;
     } catch (err) {
-      console.warn('[ÖÇ»ÛÊ÷ÖúÊÖ] µ±Ç°ÊÓÆµÒÑ²¥µ½Ä©Î²µ«½ø¶ÈÎ´Âú£¬ÖØÖÃ²¥·Å½ø¶ÈÊ§°Ü¡£', err);
+      console.warn('[æ™ºæ…§æ ‘åŠ©æ‰‹] å½“å‰è§†é¢‘å·²æ’­åˆ°æœ«å°¾ä½†è¿›åº¦æœªæ»¡ï¼Œé‡ç½®æ’­æ”¾è¿›åº¦å¤±è´¥ã€‚', err);
     }
 
     setTimeout(() => {
@@ -216,7 +216,7 @@
       if (!video) return;
 
       if (isNotFinished(video) && video.paused) {
-        console.log('[ÖÇ»ÛÊ÷ÖúÊÖ] ÊÓÆµÒÑÔÝÍ£ 2 Ãë£¬È·ÈÏÈÔÎ´²¥·ÅÍê£¬³¢ÊÔ×Ô¶¯¼ÌÐø²¥·Å¡£');
+        console.log('[æ™ºæ…§æ ‘åŠ©æ‰‹] è§†é¢‘å·²æš‚åœ 2 ç§’ï¼Œç¡®è®¤ä»æœªæ’­æ”¾å®Œï¼Œå°è¯•è‡ªåŠ¨ç»§ç»­æ’­æ”¾ã€‚');
         safePlay(video);
       }
     }, AUTO_RESUME_DELAY);
@@ -232,12 +232,12 @@
 
       if (video && video.ended) {
         if (isCurrentVideoProgressIncomplete()) {
-          console.log('[ÖÇ»ÛÊ÷ÖúÊÖ] µ±Ç°ÊÓÆµÒÑ²¥µ½Ä©Î²µ«½ø¶ÈÎ´Âú£¬´ÓÍ·ÖØÐÂ²¥·Åµ±Ç°ÊÓÆµ¡£');
+          console.log('[æ™ºæ…§æ ‘åŠ©æ‰‹] å½“å‰è§†é¢‘å·²æ’­åˆ°æœ«å°¾ä½†è¿›åº¦æœªæ»¡ï¼Œä»Žå¤´é‡æ–°æ’­æ”¾å½“å‰è§†é¢‘ã€‚');
           replayCurrentVideo(video);
           return;
         }
 
-        console.log('[ÖÇ»ÛÊ÷ÖúÊÖ] ÊÓÆµ½áÊøÒÑ³ÖÐø 2 Ãë£¬È·ÈÏÇÐ»»µ½ÏÂÒ»¸öÊÓÆµ¡£');
+        console.log('[æ™ºæ…§æ ‘åŠ©æ‰‹] è§†é¢‘ç»“æŸå·²æŒç»­ 2 ç§’ï¼Œç¡®è®¤åˆ‡æ¢åˆ°ä¸‹ä¸€ä¸ªè§†é¢‘ã€‚');
         goNextVideo();
       }
     }, AUTO_NEXT_DELAY);
@@ -278,11 +278,11 @@
     });
 
     video.addEventListener('ended', () => {
-      console.log('[ÖÇ»ÛÊ÷ÖúÊÖ] µ±Ç°ÊÓÆµ²¥·Å½áÊø£¬2 ÃëºóÈ·ÈÏÊÇ·ñÇÐ»»ÏÂÒ»¸öÊÓÆµ¡£');
+      console.log('[æ™ºæ…§æ ‘åŠ©æ‰‹] å½“å‰è§†é¢‘æ’­æ”¾ç»“æŸï¼Œ2 ç§’åŽç¡®è®¤æ˜¯å¦åˆ‡æ¢ä¸‹ä¸€ä¸ªè§†é¢‘ã€‚');
       scheduleNextIfStillEnded();
     });
 
-    console.log('[ÖÇ»ÛÊ÷ÖúÊÖ] ÒÑ°ó¶¨ÊÓÆµÊÂ¼þ¡£');
+    console.log('[æ™ºæ…§æ ‘åŠ©æ‰‹] å·²ç»‘å®šè§†é¢‘äº‹ä»¶ã€‚');
   }
 
   function scanVideo() {
@@ -398,7 +398,7 @@
 
     const title = document.createElement('div');
     title.className = 'title';
-    title.textContent = '²¥·Å±¶ËÙ';
+    title.textContent = 'æ’­æ”¾å€é€Ÿ';
     menu.appendChild(title);
 
     SPEEDS.forEach(speed => {
@@ -437,7 +437,7 @@
 
     const nextBtn = document.createElement('button');
     nextBtn.className = 'manual-next-btn';
-    nextBtn.textContent = 'ÊÖ¶¯Ìøµ½ÏÂ¸öÊÓÆµ';
+    nextBtn.textContent = 'æ‰‹åŠ¨è·³åˆ°ä¸‹ä¸ªè§†é¢‘';
     nextBtn.addEventListener('click', () => {
       goNextVideo();
     });
@@ -445,12 +445,12 @@
 
     const hint = document.createElement('div');
     hint.className = 'hint';
-    hint.textContent = 'ÔÝÍ£ 2 Ãëºó»á×Ô¶¯Ðø²¥£¬ÊÓÆµ½áÊø 2 Ãëºó»á°´ file-item Ë³Ðò²¥·ÅÏÂÒ»¸ö icon-video¡£';
+    hint.textContent = 'æš‚åœ 2 ç§’åŽä¼šè‡ªåŠ¨ç»­æ’­ï¼Œè§†é¢‘ç»“æŸ 2 ç§’åŽä¼šæŒ‰ file-item é¡ºåºæ’­æ”¾ä¸‹ä¸€ä¸ª icon-videoã€‚';
     menu.appendChild(hint);
 
     const mainBtn = document.createElement('button');
     mainBtn.className = 'main-btn';
-    mainBtn.title = 'ÖÇ»ÛÊ÷¿ÎÌÃ²¥·ÅÖúÊÖ';
+    mainBtn.title = 'æ™ºæ…§æ ‘è¯¾å ‚æ’­æ”¾åŠ©æ‰‹';
     mainBtn.textContent = '\u25B6';
 
     mainBtn.addEventListener('click', () => {

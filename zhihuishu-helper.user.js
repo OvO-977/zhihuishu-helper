@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         智慧树助手
-// @version      1.1
+// @version      1.2
 // @description  智慧树视频倍速、暂停后继续播放、播放结束后从头播放或播放下一个视频。
 // @match        *://*.zhihuishu.com/*
 // @match        *://*.zhihuishu.com/*/*
@@ -95,6 +95,10 @@
     return Math.max(0, Math.min(100, progress));
   }
 
+  function isVideoItemIncomplete(fileItem) {
+    return getVideoItemProgress(fileItem) !== 100;
+  }
+
   function isCurrentVideoProgressIncomplete() {
     const progress = getVideoItemProgress(findCurrentVideoItem());
 
@@ -109,7 +113,7 @@
     );
   }
 
-  function findNextVideoInCourseTree(currentItem) {
+  function findNextIncompleteVideoInCourseTree(currentItem) {
     if (!currentItem) return null;
 
     const videoItems = Array.from(
@@ -117,11 +121,19 @@
     ).filter(isVideoFileItem);
     const currentIndex = videoItems.indexOf(currentItem);
 
-    if (currentIndex === -1) {
+    if (!videoItems.length || currentIndex === -1) {
       return null;
     }
 
-    return videoItems[currentIndex + 1] || null;
+    for (let offset = 1; offset < videoItems.length; offset += 1) {
+      const candidate = videoItems[(currentIndex + offset) % videoItems.length];
+
+      if (isVideoItemIncomplete(candidate)) {
+        return candidate;
+      }
+    }
+
+    return null;
   }
 
   function getFileId(fileItem) {
@@ -164,7 +176,7 @@
       return;
     }
 
-    const nextVideoItem = findNextVideoInCourseTree(currentItem);
+    const nextVideoItem = findNextIncompleteVideoInCourseTree(currentItem);
 
     if (!nextVideoItem) {
       console.warn('[智慧树助手] 没找到后续视频，可能已经是最后一个视频。');

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         智慧树助手
-// @version      1.0
+// @version      1.1
 // @description  智慧树视频倍速、暂停后继续播放、播放结束后从头播放或播放下一个视频。
 // @match        *://*.zhihuishu.com/*
 // @match        *://*.zhihuishu.com/*/*
@@ -101,49 +101,27 @@
     return progress !== null && progress < 100;
   }
 
-  function findNextVideoInSameFolder(currentItem) {
-    if (!currentItem) return null;
-
-    let next = currentItem.nextElementSibling;
-
-    while (next) {
-      if (isVideoFileItem(next) && isVisible(next)) {
-        return next;
-      }
-
-      next = next.nextElementSibling;
-    }
-
-    return null;
+  function getSourceTree() {
+    return (
+      document.querySelector('#sourceTree') ||
+      document.querySelector('.source-list .nano-content') ||
+      document
+    );
   }
 
-  function findNextVideoInFollowingFolders(currentItem) {
+  function findNextVideoInCourseTree(currentItem) {
     if (!currentItem) return null;
 
-    const currentFolder = currentItem.closest('.folder-item');
+    const videoItems = Array.from(
+      getSourceTree().querySelectorAll('.file-item')
+    ).filter(isVideoFileItem);
+    const currentIndex = videoItems.indexOf(currentItem);
 
-    if (!currentFolder) return null;
-
-    let nextFolder = currentFolder.nextElementSibling;
-
-    while (nextFolder) {
-      if (
-        nextFolder.classList &&
-        nextFolder.classList.contains('folder-item')
-      ) {
-        const nextVideo = Array.from(
-          nextFolder.querySelectorAll('.file-item')
-        ).find(item => isVideoFileItem(item));
-
-        if (nextVideo) {
-          return nextVideo;
-        }
-      }
-
-      nextFolder = nextFolder.nextElementSibling;
+    if (currentIndex === -1) {
+      return null;
     }
 
-    return null;
+    return videoItems[currentIndex + 1] || null;
   }
 
   function getFileId(fileItem) {
@@ -186,11 +164,7 @@
       return;
     }
 
-    let nextVideoItem = findNextVideoInSameFolder(currentItem);
-
-    if (!nextVideoItem) {
-      nextVideoItem = findNextVideoInFollowingFolders(currentItem);
-    }
+    const nextVideoItem = findNextVideoInCourseTree(currentItem);
 
     if (!nextVideoItem) {
       console.warn('[智慧树助手] 没找到后续视频，可能已经是最后一个视频。');
